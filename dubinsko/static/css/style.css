@@ -1,0 +1,173 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&display=swap');
+
+body{
+    line-height: 1.8;
+    color: #898fa1;
+    font-size: 15px;
+    position: relative;
+    font-family: "Lato", sans-serif;
+}
+
+h1,h2,h3,h4,h5,h6 {
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #11245A;
+
+}
+
+.title-sm{
+    font-size: 16;
+    letter-spacing: 1px;
+}
+
+a {
+    font-weight: 700;
+    transition: all 0.4s ease;
+}
+
+img{
+    width: 100%;
+}
+
+small {
+    font-size: 12px;
+    letter-spacing: 1px;
+    font-weight: 700;
+}
+
+section {
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+
+.logo-text{
+    font-size: 22px;
+    text-transform: uppercase;
+    color: rgba(0,0,0,.9) !important;
+}
+
+.navbar{
+    border-bottom: 1px solid rgba(73, 39, 39, 0.1);
+}
+
+.navbar-light .navbar-nav .nav-link {
+    font:12px;
+    text-transform: upper;
+    letter-spacing: 1px;
+    font-weight: bold;
+    color: blakc;
+}
+
+.navbar-light .navbar-nav .nav-link.active{
+    color: #020009f1;
+    text-decoration: underline;
+    font-weight: bolder;
+}
+
+#home {
+    background: linear-gradient(hsla(224, 68%, 21%, 0.775), hsla(224, 68%, 21%, 0.722)), url(../images/living-room-2569325_1920.jpg);
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    display: flex;
+    align-items: center;
+}
+
+.btn {
+    border: 1px solid black;
+}
+
+#home h1{
+    font-weight: 700;
+}
+
+#home p{
+    max-width: 500px;
+    margin: 20px auto;
+}
+
+.btn {
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    padding: 12px 25px;
+}
+
+.btn-brand{
+    background-color: #898fa1;
+    color: antiquewhite;
+}
+
+.section-intro {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.section-intro .horizontal-line{
+    width:150px;
+    height: 2px;
+    background-color: #ff000085;
+    margin: 16px auto 0 auto;
+
+}
+#contact div.container div.col-lg-4 img {
+    max-width: 2fr;
+    max-height: fit-content;
+}
+
+footer .footer-links a,
+footer .social-links a{
+    color: #898fa1;
+
+}
+
+.row .col-12 .horizontal-line2 {
+    width:550px;
+    height: 2px;
+    background-color: #ff000085;
+    margin: 16px auto 0 auto;
+}
+
+footer .social-links a:hover,
+footer .footer-links a:hover {
+    color: #898fa1;    
+}
+
+.footer-top{
+    padding-top: 80px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid hsla(225, 11%, 58%, 0.73);;
+}
+
+.footer-bottom{
+    padding-bottom: 30px;
+    padding-top: 30px;
+    border-bottom:1px solid hsla(225, 11%, 58%, 0.73);
+}
+
+footer .footer-links{
+    display:block;
+    font-weight: 400;
+}
+
+/* Message flashing */
+.flash {
+    background-color: #FBB0B0;
+    padding: 10px;
+    width: 400px;
+  }
+
+  .alert {
+      display: block;
+  }
+
+  .gy-5 {
+      --bs-gutter-y: 5rem;
+  }
+
+  .lead {
+    font-size: 15px;
+    font-weight: 300;
+  }
