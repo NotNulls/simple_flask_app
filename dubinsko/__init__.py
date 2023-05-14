@@ -1,5 +1,5 @@
 from asyncio.log import logger
-from flask import Flask
+from flask import Flask, request, current_app
 from config import Config
 from flask_mail import Mail
 from flask_bootstrap import Bootstrap
@@ -11,7 +11,7 @@ from flask_babel import Babel
 app = Flask(__name__)
 mail = Mail()
 bootstrap = Bootstrap(app)
-babel = Babel(app)
+babel = Babel()
 
 app.debug = True
 app.config.from_object(Config)
@@ -21,10 +21,16 @@ app.config['MAIL_USERNAME'] ="your_email_here"
 app.config['MAIL_PASSWORD'] ="your_password_here"
 app.config['MAIL_USE_TLS'] =True
 app.config['MAIL_USE_SSL'] =False
+app.config['LANGUAGES'] = {
+    "en": "English",
+    "rs": "Serbian",
+}
 
 app.config['BOOTSTRAP_SERVE_LOCAL'] = True
 
 mail.init_app(app)
+babel.init_app(app)
+
 
 if not app.debug:
     if app.config['MAIL_SERVER']:
@@ -54,5 +60,9 @@ if not app.debug:
 
     app.logger.setLevel(logging.INFO)
     app.logger.addHandler('Dubinsko Miroslav')
+
+@babel.localeselector
+def get_locale():
+    return request.accept_languages.best_match(current_app.config['LANGUAGES'])
 
 from dubinsko import routes, error_handlers
