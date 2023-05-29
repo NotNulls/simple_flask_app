@@ -14,4 +14,6 @@ class Config(object):
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
     ADMINS = []
-    LANGUGES = ['sr','en']
+    BABEL_DEFAULT_LOCALE = "mn"
+    LANGUAGES = ['EN','MN']
+    

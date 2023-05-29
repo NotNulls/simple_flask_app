@@ -7,11 +7,12 @@ import logging
 from logging.handlers import SMTPHandler, RotatingFileHandler
 import os
 from flask_babel import Babel
+from flask import session
 
 app = Flask(__name__)
 mail = Mail()
 bootstrap = Bootstrap(app)
-babel = Babel()
+babel = Babel(app)
 
 app.debug = True
 app.config.from_object(Config)
@@ -23,13 +24,26 @@ app.config['MAIL_USE_TLS'] =True
 app.config['MAIL_USE_SSL'] =False
 app.config['LANGUAGES'] = {
     "en": "English",
-    "rs": "Serbian",
+    "rs": "Montenegrin",
 }
 
 app.config['BOOTSTRAP_SERVE_LOCAL'] = True
 
+@app.context_processor
+def inject_conf_var():
+    return dict(AVAILABLE_LANGUAGES=app.config['LANGUAGES'],CURRENT_LANGUAGE=session.get('language', request.accept_languages.best_match(app.config['LANGUAGES'].keys())))
+
+
+def get_locale():
+    # return request.accept_languages.best_match(current_app.config['LANGUAGES'])
+    if request.args.get('language'):
+        session['language'] = request.args.get('language')
+        return session.get('language','rs')
+    else:
+        return "en"
+
 mail.init_app(app)
-babel.init_app(app)
+babel.init_app(app, locale_selector=get_locale)
 
 
 if not app.debug:
@@ -61,8 +75,6 @@ if not app.debug:
     app.logger.setLevel(logging.INFO)
     app.logger.addHandler('Dubinsko Miroslav')
 
-@babel.localeselector
-def get_locale():
-    return request.accept_languages.best_match(current_app.config['LANGUAGES'])
+
 
 from dubinsko import routes, error_handlers

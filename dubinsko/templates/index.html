@@ -43,6 +43,15 @@
           <li class="nav-item">
             <a class="nav-link" href="#contact">Kontakt</a>
           </li>
+          <li class="nav-item">
+            {% for language in AVAILABLE_LANGUAGES.items() %}
+              {% if CURRENT_LANGUAGE == language[0] %}
+                {#{{ language[1] }}#}
+              {% else %}
+                  <a class="nav-link" href="{{ url_for('set_language', language=language[0]) }}" >{{ language[1] }}</a>
+              {%  endif %}
+              {% endfor %}
+          </li>
       </ul>
     </div>
   </div>
