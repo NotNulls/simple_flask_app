@@ -8,11 +8,12 @@ from logging.handlers import SMTPHandler, RotatingFileHandler
 import os
 from flask_babel import Babel
 from flask import session
+from babel.core import UnknownLocaleError
 
 app = Flask(__name__)
 mail = Mail()
-bootstrap = Bootstrap(app)
-babel = Babel(app)
+bootstrap = Bootstrap()
+babel = Babel()
 
 app.debug = True
 app.config.from_object(Config)
@@ -22,29 +23,36 @@ app.config['MAIL_USERNAME'] ="your_email_here"
 app.config['MAIL_PASSWORD'] ="your_password_here"
 app.config['MAIL_USE_TLS'] =True
 app.config['MAIL_USE_SSL'] =False
-app.config['LANGUAGES'] = {
-    "en": "English",
-    "rs": "Montenegrin",
-}
+
 
 app.config['BOOTSTRAP_SERVE_LOCAL'] = True
 
 @app.context_processor
 def inject_conf_var():
-    return dict(AVAILABLE_LANGUAGES=app.config['LANGUAGES'],CURRENT_LANGUAGE=session.get('language', request.accept_languages.best_match(app.config['LANGUAGES'].keys())))
-
+    return dict(AVAILABLE_LANGUAGES=app.config['LANGUAGES'], CURRENT_LANGUAGE=session.get('language', request.accept_languages.best_match(app.config['LANGUAGES'].keys())))
+    
 
 def get_locale():
-    # return request.accept_languages.best_match(current_app.config['LANGUAGES'])
-    if request.args.get('language'):
-        session['language'] = request.args.get('language')
-        return session.get('language','rs')
-    else:
-        return "en"
+        
 
-mail.init_app(app)
+        language = session.get('language')
+
+        # Check if the language is available in LANGUAGES
+        if language and language in app.config['LANGUAGES']:
+            return language
+
+        # Get the language from the URL parameter
+        url_language = request.view_args.get('language')
+
+        # Check if the language is available in LANGUAGES
+        if url_language and url_language in app.config['LANGUAGES']:
+            return url_language
+
+        return request.accept_languages.best_match(app.config['LANGUAGES'].keys())
+
+# mail.init_app(app)
 babel.init_app(app, locale_selector=get_locale)
-
+bootstrap.init_app(app)
 
 if not app.debug:
     if app.config['MAIL_SERVER']:
@@ -75,6 +83,6 @@ if not app.debug:
     app.logger.setLevel(logging.INFO)
     app.logger.addHandler('Dubinsko Miroslav')
 
-
+    
 
 from dubinsko import routes, error_handlers

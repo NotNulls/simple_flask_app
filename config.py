@@ -14,6 +14,9 @@ class Config(object):
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
     ADMINS = []
-    BABEL_DEFAULT_LOCALE = "mn"
-    LANGUAGES = ['EN','MN']
+    LANGUAGES = {
+        'en': "English",
+        'sr_Latn_ME': "Montenegrin",
+        }
+    BABEL_TRANSLATION_DIRECTORIES = os.path.join(basedir, "dubinsko/translations")
     

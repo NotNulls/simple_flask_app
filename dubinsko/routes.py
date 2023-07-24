@@ -5,20 +5,14 @@ from dubinsko.email import send_email
 from dubinsko.forms import ContactForm
 from dubinsko import app
 from flask import session
+from flask_babel import _, lazy_gettext as _l
 
 
-@app.before_request
-def before():
-    if request.view_args and 'lang_code' in request.view_args:
-        if request.view_args['lang_code'] not in ('en','rs'):
-            return abort(404)
-        g.current_lang = request.view_args['lang_code']
-        request.view_args.pop('lang_code')
 
-@app.route("/<lang_code>",methods=["GET","POST"])
 @app.route("/home", methods=["GET","POST"])
 @app.route("/", methods=["GET","POST"])
 def home_page():
+    
     form = ContactForm()
     
     
@@ -38,21 +32,12 @@ def home_page():
              )
 
         except:
-             return render_template('index.html', form = form)
+             return render_template('index.html', form = form, title=_('Home - Dubinsko čišćenje'))
     
     return render_template('index.html', form = form)
 
-
-@app.route('/onama')
-def about_page():
-    render_template('about_us.html')
-
-
-@app.route('/<lang_code>/about')
-def index():
-    return render_template('about_us.html')
-
-@app.route('/language=<language>')
+@app.route('/language/<language>')
 def set_language(language=None):
-    session['language'] = language
+    if language and language in app.config['LANGUAGES']:
+        session['language'] = language
     return redirect(url_for('home_page'))

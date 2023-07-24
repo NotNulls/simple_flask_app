@@ -21,7 +21,7 @@
 {% block body %}
 <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-white">
   <div class="container">
-    <a class="navbar-brand logo-text" href="#home">Dubinsko Čišćenje</a>
+    <a class="navbar-brand logo-text" href="#home"> {{ _("Dubinsko Čišćenje") }} </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -29,29 +29,32 @@
       <ul class="navbar-nav ms-auto">
 
         <li class="nav-item">
-          <a class="nav-link" href="#home">Home</a>
+          <a class="nav-link" href="#home">{{ gettext("Početna") }}</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#services">Usluge</a>
+            <a class="nav-link" href="#services">{{ _("Usluge") }}</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#portfolio">Portfolio</a>
+            <a class="nav-link" href="#portfolio">{{ _("Portfolio") }}</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#about_us">O nama</a>
+            <a class="nav-link" href="#about_us">{{ _("O nama") }}</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#contact">Kontakt</a>
+            <a class="nav-link" href="#contact">{{ _("Kontakt") }}</a>
           </li>
-          <li class="nav-item">
+          
             {% for language in AVAILABLE_LANGUAGES.items() %}
               {% if CURRENT_LANGUAGE == language[0] %}
-                {#{{ language[1] }}#}
+                
+              <!-- {{ language[1] }} -->
               {% else %}
+                <li class="nav-item">
                   <a class="nav-link" href="{{ url_for('set_language', language=language[0]) }}" >{{ language[1] }}</a>
+                </li>
               {%  endif %}
               {% endfor %}
-          </li>
+        
       </ul>
     </div>
   </div>
@@ -61,11 +64,11 @@
   <div class="container text-center">
     <div class="row justify-content-center">
       <div class="col-md-10">
-        <h1 class="text-white display-4">Temeljno dubinsko pranje i čišćenje vašeg nameštaja.</h1> 
+        <h1 class="text-white display-4">{{ _("Temeljno dubinsko pranje i čišćenje vašeg namještaja.") }}</h1> 
         <br>
-        <p class="text-white">Za besprekorno čist nameštaj koristimo najsavevremenija antibakterijska i antialergijska sredstva.</p>
+        <p class="text-white">{{ _("Za besprekorno čist namještaj koristimo najsavevremenija antibakterijska i antialergijska sredstva.") }}</p>
         <br>
-        <a href="#contact" class="btn btn-brand">Contact</a>
+        <a href="#contact" class="btn btn-brand">{{ _("Kontakt") }}</a>
     </div>
   </div>
 </section>
@@ -75,8 +78,8 @@
     <div class="container py-5">
       <div class="row h-100 align-items-center py-5">
         <div class="col-lg-8">
-          <h1 class="display-4">O nama:</h1>
-          <p class="lead text-muted mb-0">Dubinsko Čišćenje je servis orijentisan na pružanje usluga na teritoriji opština Tivat i Kotor, a po potrebi ili po dogovoru i za druge lokacije. Dolazimo na adresu klijenta po pozivu,poslove odrađujemo na licu mjesta. Koristimo preparate koji su ekološki i bio razgradivi i koja su apsolutno sigurna po zdravlje ukućana i kućnih ljubimaca. Budite uvereni u revnosnu isporuku usluga kao i kvaliteta istih.</p>
+          <h1 class="display-4">{{ _("O nama:") }}</h1>
+          <p class="lead text-muted mb-0">{{ _("Dubinsko Čišćenje je servis orijentisan na pružanje usluga na teritoriji opština Tivat i Kotor, a po potrebi ili po dogovoru i za druge lokacije. Dolazimo na adresu klijenta po pozivu,poslove odrađujemo na licu mjesta. Koristimo preparate koji su ekološki i bio razgradivi i koja su apsolutno sigurna po zdravlje ukućana i kućnih ljubimaca. Budite uvjereni u revnosnu isporuku usluga kao i kvaliteta istih.") }}</p>
           
         </div>
         <div class="col-lg-4 d-none d-lg-block"><img src="https://bootstrapious.com/i/snippets/sn-about/illus.png" alt="" class="img-fluid"></div>
@@ -90,7 +93,7 @@
   <div class="container">
       <div class="row">
         <div class="col-12 section-intro">
-            <h1>Usluge koje nudimo</h1>
+            <h1>{{ _("Usluge koje nudimo") }}</h1>
             <div class="horizontal-line"></div>
         </div>
       </div>
@@ -99,36 +102,36 @@
             <div class="icon-box">
             <i class='bx bxs-brush-alt bx-lg'></i>
             </div>
-            <h4 class="title-sm mt-4">Ćišćenje nameštaja</h4>
-            <p>Da bi ste boravili u zdravom i udobnom okruženju potreban Vam je čist nameštaj</p>
+            <h4 class="title-sm mt-4">{{ _("Ćišćenje namještaja") }}</h4>
+            <p>{{ _("Da bi ste boravili u zdravom i udobnom okruženju potreban Vam je čist namještaj") }}</p>
             <p>
-              Uslugama dubinskog pranja nudimo Vam detaljno i efektivno čišćenje nameštaja najmodernijim metodama i sredstvima. 
+              {{ _("Uslugama dubinskog pranja nudimo Vam detaljno i efektivno čišćenje namještaja najmodernijim metodama i sredstvima.") }} 
             </p>
         </div>
         <div class="col-lg-4 col-sm-6 p-4">
             <div class="icon-box">
             <i class='bx bxs-car bx-lg'></i>
             </div>
-            <h4 class="title-sm mt-4">Čišćenje automobila</h4>
-            <p>Vršimo detaljno usicavanje, pranje tapaciranih delova, sjedišta i gepeka.
+            <h4 class="title-sm mt-4">{{ _("Čišćenje automobila") }}</h4>
+            <p>{{ _("Vršimo detaljno usisavanje, pranje tapaciranih dijelova, sjedišta i gepeka.") }}
             </p>
             <p>
-            Usluga takođe sadrži pranje prtljažnika kao i plastičnih dijelova.
+            {{ _("Usluga takođe sadrži pranje prtljažnika kao i plastičnih dijelova.") }}
             </p>
             <p>
-              Sušenje automobila, kao vrlo bitna stavka, se u većini slučajeva vrši na prirodan način, provetravanjem.
+              {{ _("Sušenje automobila, kao vrlo bitna stavka, se u većini slučajeva vrši na prirodan način, provjetravanjem.") }}
             </p>
         </div>
         <div class="col-lg-4 col-sm-6 p-4">
             <div class="icon-box">
             <i class='bx bx-water bx-lg'></i>
             </div>
-            <h4 class="title-sm mt-4">Čišćenje plovila</h4>
+            <h4 class="title-sm mt-4">{{ _("Čišćenje plovila") }}</h4>
             <p>
-              Rešavamo probleme nagomilane prljavštine, čistimo garniture, madrace i tepihe, kao i ostale tapacirane povšine.
+              {{ _("Rešavamo probleme nagomilane prljavštine, čistimo garniture, madrace i tepihe, kao i ostale tapacirane povšine.") }}
             </p>
             <p>
-              Korišćenjem namodernijih biorazgradivih sredstava osvežavamo unutrašnji prostor Vašeg plovila i pripremamo ga za predstojeću sezonu.
+              {{ _("Korišćenjem namodernijih biorazgradivih sredstava osvježavamo unutrašnji prostor Vašeg plovila i pripremamo ga za predstojeću sezonu.") }}
             </p>
         </div>
       </div>
@@ -138,7 +141,7 @@
 <section id="portfolio">
 
   <div class="col-12 section-intro">
-    <h1>Portfolio</h1>
+    <h1>{{ _("Portfolio") }}</h1>
     <div class="horizontal-line"></div>
   </div>
 
@@ -190,7 +193,7 @@
 <section id="contact">
 
   <div class="col-12 section-intro">
-    <h1>Kontakt</h1>
+    <h1>{{ _("Kontakt") }}</h1>
     <div class="horizontal-line"></div>
   </div>
 
@@ -207,15 +210,15 @@
           {% endfor %}
           <br>
           {{ form.name.label() }}
-          {{ form.name(class="form-control", placeholder="Enter Name:") }}
+          {{ form.name(class="form-control", placeholder=_("Unesite ime:")) }}
           <br>
           {{ form.email_address.label() }}
-          {{ form.email_address(class="form-control", placeholder="Enter Email Address:")}}
+          {{ form.email_address(class="form-control", placeholder=_("Unesite e-mail adresu:"))}}
           <br>
           {{ form.message.label() }}
           {{ form.message(class="form-control") }}
           <br>
-          <button type="submit" class="btn btn-brand">Submit</button>
+          <button type="submit" class="btn btn-brand">{{ _("Pošalji") }}</button>
         </form>
       </div>
     </div>
@@ -225,7 +228,7 @@
 <div class="container">
   <div class="row">
     <div class="col-12 section-intro">
-      <h1>Krenimo u akciju!</h1>
+      <h1>{{ _("Krenimo u akciju!") }}</h1>
       <div class="horizontal-line2"></div>
     </div>
   </div>
@@ -236,8 +239,8 @@
     <div class="container">
       <div class="row gy-5">
         <div class="col-md-4">
-          <h4 class="logo-text">Dubnisko Čišćenje</h4>
-          <p>Ovede napisati šta je neophodno.</p>
+          <h4 class="logo-text">{{ _("Dubnisko Čišćenje") }}</h4>
+          <p>{{ _("Za besprekorno čist namještaj.") }}</p>
           <div class="social-icons">
             <a href="#"><i class="bx bxl-facebook"></i></a>
             <a href="#"><i class="bx bxl-twitter"></i></a>
@@ -246,14 +249,14 @@
           </div>
         </div>
         <div class="col-md-2">
-          <h5 class="title-ms">Navigation</h5>
+          <h5 class="title-ms">{{ _("Navigation") }}</h5>
           <div class="footer-links"></div>
-            <a href="#home">Home</a>
+            <a href="#home">{{ _("Home") }}</a>
             <br>
-            <a href="#services">Usluge</a>            
+            <a href="#services">{{ _("Usluge") }}</a>            
         </div>
         <div class="col-md-2">
-          <h5 class="title-ms">Kontakt</h5>
+          <h5 class="title-ms">{{ _("Kontakt") }}</h5>
           <div class="footer-links"></div>
               <p class="mb">Miroslav</p>
               <p class="mb">tel:*******</p>
