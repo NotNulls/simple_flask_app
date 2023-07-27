@@ -19,10 +19,11 @@ app.debug = True
 app.config.from_object(Config)
 app.config['MAIL_SERVER'] ="smtp.gmail.com"
 app.config['MAIL_PORT'] =587
-app.config['MAIL_USERNAME'] ="your_email_here"
-app.config['MAIL_PASSWORD'] ="your_password_here"
+app.config['MAIL_USERNAME'] ="<your-email-address>"
+app.config['MAIL_PASSWORD'] ="<yourp-email-password>"
 app.config['MAIL_USE_TLS'] =True
 app.config['MAIL_USE_SSL'] =False
+app.config['MAIL_DEFAULT_SENDER'] = ('<admin-name>', '<your-email-address>')
 
 
 app.config['BOOTSTRAP_SERVE_LOCAL'] = True
@@ -50,7 +51,7 @@ def get_locale():
 
         return request.accept_languages.best_match(app.config['LANGUAGES'].keys())
 
-# mail.init_app(app)
+mail.init_app(app)
 babel.init_app(app, locale_selector=get_locale)
 bootstrap.init_app(app)
 
@@ -66,7 +67,7 @@ if not app.debug:
         mailhost=(app.config['MAIL_SERVER'], app.config['MAIL_PORT']),
         fromaddr='no-reply@' + app.config['MAIL_SERVER'],
         toaddrs=app.config['ADMINS'], 
-        subject='Microblog Failure',
+        subject='Dubinsko Miroslav Failure',
         credentials=auth, 
         secure=secure)
 

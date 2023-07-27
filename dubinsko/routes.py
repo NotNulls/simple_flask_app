@@ -1,6 +1,6 @@
 from email.message import Message
 from dubinsko import app, mail
-from flask import current_app, render_template, request, redirect, g, abort, url_for
+from flask import current_app, render_template, request, redirect, abort, url_for
 from dubinsko.email import send_email
 from dubinsko.forms import ContactForm
 from dubinsko import app
@@ -24,7 +24,7 @@ def home_page():
 
         try:
              send_email(
-                 subject=name,
+                 subject=name + '@ Dubinsko - upit',
                  sender=email,
                  recipients=current_app.config['MAIL_USERNAME'],
                  text_body=message,
@@ -41,3 +41,4 @@ def set_language(language=None):
     if language and language in app.config['LANGUAGES']:
         session['language'] = language
     return redirect(url_for('home_page'))
+
