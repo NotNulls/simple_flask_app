@@ -1,7 +1,8 @@
-from dubinsko import app, cli
+from dubinsko import create_app, cli
 
-
+app = create_app()
 cli.register(app)
+
 
 @app.shell_context_processor
 def make_shell_context():
@@ -9,3 +10,5 @@ def make_shell_context():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+    

@@ -1,6 +1,6 @@
 import os
 import click
-from dubinsko import app
+
 
 def register(app):
     

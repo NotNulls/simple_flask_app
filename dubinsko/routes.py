@@ -1,16 +1,14 @@
 from email.message import Message
-from dubinsko import app, mail
-from flask import current_app, render_template, request, redirect, abort, url_for
+from flask import current_app, render_template, request, redirect, abort, url_for, Blueprint, current_app
 from dubinsko.email import send_email
 from dubinsko.forms import ContactForm
-from dubinsko import app
-from flask import session
+from flask import session, current_app
 from flask_babel import _, lazy_gettext as _l
 
+bp = Blueprint('routes', __name__)
 
-
-@app.route("/home", methods=["GET","POST"])
-@app.route("/", methods=["GET","POST"])
+@bp.route("/home", methods=["GET","POST"])
+@bp.route("/", methods=["GET","POST"])
 def home_page():
     
     form = ContactForm()
@@ -36,9 +34,9 @@ def home_page():
     
     return render_template('index.html', form = form)
 
-@app.route('/language/<language>')
+@bp.route('/language/<language>')
 def set_language(language=None):
-    if language and language in app.config['LANGUAGES']:
+    if language and language in current_app.config['LANGUAGES']:
         session['language'] = language
-    return redirect(url_for('home_page'))
+    return redirect(url_for('routes.home_page'))
 

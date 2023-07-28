@@ -3,8 +3,8 @@
 {% block styles %}
 
 
-<link rel="stylesheet" type="text/css" href="{{url_for('.static', filename='css/bootstrap.min.css')}}" crossorigin="anonymous">
-<link rel="stylesheet" type="text/css" href="{{url_for('.static', filename='css/style.css')}}" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/bootstrap.min.css')}}" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/style.css')}}" crossorigin="anonymous">
 <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet' crossorigin="anonymous">
 
 
@@ -50,7 +50,7 @@
               <!-- {{ language[1] }} -->
               {% else %}
                 <li class="nav-item">
-                  <a class="nav-link" href="{{ url_for('set_language', language=language[0]) }}" >{{ language[1] }}</a>
+                  <a class="nav-link" href="{{ url_for('routes.set_language', language=language[0]) }}" >{{ language[1] }}</a>
                 </li>
               {%  endif %}
               {% endfor %}
